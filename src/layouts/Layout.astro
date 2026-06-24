@@ -1,23 +1,166 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+// src/pages/index.astro
+// EDIT: change name, tagline, and links in one place
+const name = "Brendan Rudberg";
+const tagline = "Mechanical Engineering @ Caltech — Controls & Robotics";
+const github = "https://github.com/brendanrudberg";
+const linkedin = "https://www.linkedin.com/in/YOUR-HANDLE";
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{name}</title>
+  </head>
+  <body>
+
+    <!-- ============ NAV BAR (sticky at top) ============ -->
+    <nav class="nav">
+      <a href="#about" class="brand">{name}</a>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href={github} target="_blank">GitHub</a>
+        <a href={linkedin} target="_blank">LinkedIn</a>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- ============ ABOUT ============ -->
+      <section id="about">
+        <h1>{name}</h1>
+        <p class="tagline">{tagline}</p>
+
+        <!-- EDIT: drop a headshot in /public/me.jpg, then this will render it -->
+        <img src="/me.jpg" alt="" class="headshot" />
+
+        <p>
+          {/* EDIT: your about-me paragraph goes here. */}
+          Write a few sentences about yourself.
+        </p>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <!-- Project 1 -->
+        <article class="project">
+          <h3>Single Inverted Pendulum (DIPC)</h3>
+          <img src="/projects/dipc.jpg" alt="" />
+          <p>
+            {/* EDIT: rewrite freely. Stub from your build: */}
+            Cart-mounted pendulum with energy-gated LQR swing-up and a Kalman
+            filter for state estimation. Arduino Nano ESP32, NEMA 17 stepper,
+            AMT10E2-V encoders, 1 m V-slot rail.
+          </p>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project">
+          <h3>Caltech Racing — FSAE Electric</h3>
+          <img src="/projects/fsae.jpg" alt="" />
+          <p>
+            Electrical Integration on the 600 V accumulator and HV enclosure
+            design. Incoming team president for 2026–27.
+          </p>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project">
+          <h3>Autonomous Exploration Robot (ME/CS 129)</h3>
+          <img src="/projects/teriyaki.jpg" alt="" />
+          <p>
+            Raspberry Pi robot with Dijkstra-based path planning, multi-sensor
+            fusion (ultrasonic, IR, NFC, gyroscope), and a multithreaded brain
+            loop for any-time re-tasking.
+          </p>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project">
+          <h3>Photonic LiDAR Research — UW Mo Li Group</h3>
+          <img src="/projects/lidar.jpg" alt="" />
+          <p>
+            SURF on distributed Bragg reflectors for photonic LiDAR beam
+            steering. HSQ direct-write fabrication approach achieving 84%
+            footprint reduction and 3× reflectance over a published baseline.
+          </p>
+        </article>
+
+        <!-- EDIT: copy an <article class="project"> block to add more -->
+      </section>
+
+    </main>
+
+    <footer>
+      <a href={github} target="_blank">GitHub</a> ·
+      <a href={linkedin} target="_blank">LinkedIn</a>
+    </footer>
+
+    <!-- ============ STYLES ============ -->
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, system-ui, sans-serif;
+        line-height: 1.6;
+        color: #111;
+        background: #fff;
+      }
+
+      /* sticky nav */
+      .nav {
+        position: sticky; top: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1rem 2rem;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        z-index: 10;
+      }
+      .nav .brand { font-weight: 600; text-decoration: none; color: #111; }
+      .nav .links a {
+        margin-left: 1.5rem;
+        text-decoration: none;
+        color: #444;
+      }
+      .nav .links a:hover { color: #000; }
+
+      main { max-width: 780px; margin: 0 auto; padding: 3rem 2rem; }
+
+      section { padding: 3rem 0; }
+      h1 { font-size: 2.5rem; margin: 0 0 0.5rem; }
+      h2 { font-size: 1.75rem; margin-top: 2rem; }
+      h3 { margin-bottom: 0.5rem; }
+      .tagline { color: #666; font-size: 1.1rem; }
+
+      .headshot {
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 1.5rem 0;
+        background: #f0f0f0; /* shows while image is missing */
+      }
+
+      .project { margin-bottom: 3rem; }
+      .project img {
+        width: 100%;
+        max-height: 360px;
+        object-fit: cover;
+        background: #f0f0f0; /* placeholder color until image added */
+        border-radius: 6px;
+        margin: 0.5rem 0 1rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        border-top: 1px solid #eee;
+      }
+      footer a { color: #666; }
+    </style>
+  </body>
+</html>

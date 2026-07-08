@@ -13,7 +13,26 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{name} — {tagline}</title>
     <meta name="description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics. Projects include an inverted pendulum control system, FSAE Electric race car hardware, and autonomous robotics." />
-    <link rel="canonical" href="https://your-domain.com/" />
+    <link rel="canonical" href="https://brendanrudberg.com/" />
+
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:title" content={`${name} — ${tagline}`} />
+    <meta property="og:description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics." />
+    <meta property="og:image" content="https://brendanrudberg.com/me.jpg" />
+    <meta property="og:url" content="https://brendanrudberg.com/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": name,
+      "jobTitle": "Mechanical Engineering Student",
+      "affiliation": "California Institute of Technology",
+      "url": "https://your-domain.com",
+      "sameAs": [github, linkedin]
+    })} />
   </head>
   <body>
 

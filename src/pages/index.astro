@@ -219,9 +219,12 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
 
       .project-figure img {
         width: 100%;
-        height: auto;
-        max-height: 360px;  /* matched to .project img */
-        object-fit: contain;
+        height: 360px;        /* match the landscape images' rough height */
+        object-fit: cover;
+        background: #f0f0f0; /* placeholder color until image added */
+        border-radius: 6px;
+        margin: 0.5rem 0 1rem;
+        object-position: center;
       }
 
       footer {

@@ -121,6 +121,24 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
 
         <!-- Project 5 -->
         <article class="project">
+          <h3>Object Tracking Robot</h3>
+          <figure>
+            <video src="/Object tracking robot.mp4" controls muted loop playsinline preload="metadata" width="100%"></video>
+            <figcaption>A demonstration of mechanical object tracking using computer vision.</figcaption>
+          </figure>
+          <ul>
+            <li>Designed and implemented a real-time vision-based object tracking robot using camera input and motorized actuation.</li>
+            <li>Performed color-based segmentation by converting RGB frames to binary masks isolating target objects by color and size.</li>
+            <li>Applied morphological operations (erosion and dilation) to denoise binary images and improve object detection robustness.</li>
+            <li>Identified and tracked the largest connected component to prioritize the closest target in multi-object scenes.</li>
+            <li>Computed object centroids and mapped image-space coordinates to relative positional error for closed-loop control.</li>
+            <li>Generated smooth motor trajectories using spline interpolation for stable camera and platform motion.</li>
+            <li>Developed a multithreaded software architecture enabling concurrent image acquisition, processing, and motor control.</li>
+          </ul>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="project">
           <h3>Photonic LiDAR Research — UW Mo Li Group</h3>
           <figure>
             <img src="/tec.jpg" alt="Heatsink with TEC and laser chip" />
@@ -147,10 +165,6 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
             <video src="/v10.mp4" controls muted loop playsinline preload="metadata" width="100%"></video>
             <figcaption>The hardest project I've ever worked on. </figcaption>
           </figure>
-          <ul>
-            <li> Projected an indoor V10 bouldering problem at Uplift Climbing gym in Shoreline, WA</li>
-            <li> Carefully analyzed the route to determine the optimal beta. </li>
-          </ul>
         </article>
 
         <!-- EDIT: copy an <article class="project"> block to add more -->

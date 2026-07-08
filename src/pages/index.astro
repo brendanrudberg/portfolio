@@ -65,7 +65,7 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
         <!-- Project 2 -->
         <article class="project">
           <h3>Caltech Racing — FSAE Electric</h3>
-          <figure>
+          <figure class = "project-figure2">
             <img src="/racecar.jpg" alt="Formula SAE electric racecar" />
             <figcaption>The rolling chassis we brought to the 2026 competition in Michigan. Unfortunately couldn't get it powered in time.</figcaption>
           </figure>
@@ -220,13 +220,25 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
       .project-figure img {
         width: 100%;          /* natural width instead of forcing 100% */
         height: auto;
-        max-height: 640px;    /* cap the height instead of the width */
+        max-height: 720px;    /* cap the height instead of the width */
         max-width: 100%;      /* but never overflow the container */
         object-fit: cover;
         background: #f0f0f0; /* placeholder color until image added */
         border-radius: 6px;
         margin: 0.5rem 0 1rem;
         object-position: center;
+      }
+
+      .project-figure2 img {
+        width: 100%;          /* natural width instead of forcing 100% */
+        height: auto;
+        max-height: 540px;    /* cap the height instead of the width */
+        max-width: 100%;      /* but never overflow the container */
+        object-fit: cover;
+        background: #f0f0f0; /* placeholder color until image added */
+        border-radius: 6px;
+        margin: 0.5rem 0 1rem;
+        object-position: 40%;
       }
 
       footer {

@@ -54,7 +54,7 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
             <figcaption>Double pendulum hardware demonstatration. The control loop is a work in progress!</figcaption>
           </figure>
           <ul>
-            <li>Designed and built a cart-pole system that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
+            <li>In a team of six, designed and built a cart-pole system that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
             <li>Architected the full control stack: an energy-based swing-up controller with an energy-gated handoff to an LQR balancing controller, so the system transitions automatically once the pendulum enters the capture region near vertical.</li>
             <li>Implemented state estimation with a Kalman filter fusing encoder position and velocity, tuned to reject quantization noise without lagging the fast pole dynamics.</li>
             <li>Built the hardware around a NEMA 17 stepper driven by a TMC2209, AMT10E2-V encoders for cart and pendulum angle, and an Arduino Nano ESP32 running the real-time loop.</li>
@@ -88,13 +88,13 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
 
         <!-- Project 3 -->
         <article class="project">
-          <h3>Autonomous Exploration Robot (ME/CS 129)</h3>
+          <h3>Autonomous Exploration Robot</h3>
           <figure>
             <img src="/Robot 2.jpg" alt="Autonomous exploration robot" />
             <figcaption>Teriyaki, the autonomous exploration robot.</figcaption>
           </figure>
           <ul>
-            <li>Built a robot that line-follows through an unknown street grid, maps it autonomously, and navigates to commanded goals while routing around obstacles.</li>
+            <li>In a team of two, built a robot that line-follows through an unknown street grid, maps it autonomously, and navigates to commanded goals while routing around obstacles.</li>
             <li>Implemented line and street following from a 3-sensor IR array, using filtered edge detectors (exponential smoothing with hysteresis) for robust intersection and dead-end detection, with a gyroscope integrating turn angle to resolve discrete heading changes across 8 compass directions.</li>
             <li>Built an incremental map of intersections and street states (unexplored / connected / dead-end / blocked) and layered Dijkstra path planning on top for both goal-directed navigation and autonomous exploration that targets the nearest unfinished intersection.</li>
             <li>Fused 3 ultrasonic sensors for multi-threshold blockage detection (20 / 65 / 92 cm) feeding dynamic replanning with blockage-clear retries and directed exploration fallback when no known route exists, plus an NFC reader tagging intersection IDs.</li>

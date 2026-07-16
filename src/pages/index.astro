@@ -1,10 +1,42 @@
 ---
 // src/pages/index.astro
+import "katex/dist/katex.min.css";
+import katex from "katex";
+
 const name = "Brendan Rudberg";
 const tagline = "Mechanical Engineering at Caltech — Controls & Robotics";
 const github = "https://github.com/brendanrudberg";
 const linkedin = "https://www.linkedin.com/in/brendanrudberg";
+
+const render = (tex: string) => katex.renderToString(tex, { displayMode: true, throwOnError: false });
+
+const d3States = render(String.raw`
+x = [\,r_z,\; v_z,\; \theta,\; \omega\,]^{\top}
+`);
+
+const d3Dynamics = [
+  String.raw`\dot{r}_z = v_z`,
+  String.raw`\dot{v}_z = g - \frac{1}{m}\!\left[(F_\text{flaps} + F_\text{body})\sin\theta + F_\text{axial}\cos\theta\right] - \frac{1}{m}T(t)\cos\gamma(t)`,
+].map(render);
+
+const d3Forces = [
+  String.raw`F_\text{flaps} = \tfrac{1}{2}\rho\, v_z|v_z|\sin\theta\!\left[2 S_\text{fwd} C_{N,\text{fwd}}\cos\delta_\text{fwd} + 2 S_\text{aft} C_{N,\text{aft}}\cos\delta_\text{aft}\right]`,
+  String.raw`F_\text{body} = \tfrac{1}{2}\rho\, v_z|v_z|\, A_\text{ref}\, C_{N,\text{body}}\sin\theta`,
+  String.raw`F_\text{axial} = \tfrac{1}{2}\rho\, v_z|v_z|\, A_\text{ref}\, C_{A,\text{body}}\cos\theta`
+].map(render);
+
+const d3Moments = [
+  String.raw`\dot{\theta} = \omega`,
+  String.raw`\dot{\omega} = \frac{1}{I}\!\left[M_\text{flaps} + M_\text{body} + T(t)\sin\gamma(t)\,r_\text{TVC}\right]`,
+  String.raw`M_\text{flaps} = \tfrac{1}{2}\rho\, v_z|v_z|\sin\theta\!\left[2 S_\text{fwd} C_{N,\text{fwd}}\cos\delta_\text{fwd}\, r_\text{fwd} - 2 S_\text{aft} C_{N,\text{aft}}\cos\delta_\text{aft}\, r_\text{aft}\right]`,
+  String.raw`M_\text{body} = \tfrac{1}{2}\rho\, v_z|v_z|\, C_{N,\text{body}}\sin\theta\, A_\text{ref}\,(x_\text{CP}(\theta) - x_\text{CG})`,
+].map(render);
+
+const d3Constraint = render(String.raw`
+M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\delta_i\, d_i \;\le\; \tau_\text{servo}
+`);
 ---
+
 
 <html lang="en">
   <head>
@@ -46,6 +78,30 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
       <!-- ============ PROJECTS ============ -->
       <section id="projects">
         <h2>Projects</h2>
+
+        <!-- Project 0 -->
+        <article class="project">
+          <h3>Daedalus 3 Flap Design</h3>
+          <div class="math-block">
+            <h4>States</h4>
+            <div set:html={d3States} />
+
+            <h4>Dynamics</h4>
+            <div set:html={d3Dynamics} />
+            <div set:html={d3Forces} />
+            <div set:html={d3Moments} />
+
+            <h4>Constraint</h4>
+            <div set:html={d3Constraint} />
+          </div>
+          <p style="text-align: center;">Dynamics equations for Daedalus 3. Z-axis symmetry is assumed.</p>
+          <ul>
+            <li>Own the aerodynamic flap design for Daedalus 3, a rocket-shaped bellyflop-to-vertical-landing drone at Parsec Rocketry, with responsibility for flap sizing, placement, hinge geometry, and the control-authority spec for the engine-off descent.</li>
+            <li>Derived a 4-state nonlinear coupled dynamics model of the bellyflop maneuver (vertical position, vertical velocity, pitch, pitch rate), with flap and body aerodynamic normal- and axial-force terms driving both translation and rotation.</li>
+            <li>Identified terminal velocity as the primary design driver, since arrest distance under a T/W near 1.15 scales with the square of terminal velocity, making belly-down drag maximization the core flap-sizing objective.</li>
+            <li>Built a nested optimization in Python (scipy) that sweeps hardware variables (forward and aft flap areas, moment arms, hinge offset) around an inner control-schedule tuning loop, integrating the vehicle dynamics via segmented solve_ivp calls with phase-transition events.</li>
+          </ul>
+        </article>
 
         <!-- Project 1 -->
         <article class="project">
@@ -168,7 +224,7 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
           <h3>Indoor V10</h3>
           <figure>
             <video src="/v10.mp4" controls muted loop playsinline preload="metadata" width="100%"></video>
-            <figcaption>The hardest project I've ever worked on. </figcaption>
+            <figcaption>The hardest project I've worked on. </figcaption>
           </figure>
         </article>
 
@@ -186,6 +242,7 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
 
     <!-- ============ STYLES ============ -->
     <style>
+      
       * { box-sizing: border-box; }
       body {
         margin: 0;
@@ -219,6 +276,17 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
       h2 { font-size: 1.75rem; margin-top: 2rem; }
       h3 { margin-bottom: 0.5rem; }
       .tagline { color: #666; font-size: 1.1rem; }
+
+      :global(.math-block .katex-display) {
+        text-align: center;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 0;
+      }
+      :global(.math-block .katex-display > .katex) {
+        display: inline-block;
+        text-align: initial;
+      }
 
       .headshot {
         width: 250px; height: 250px;

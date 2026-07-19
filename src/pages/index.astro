@@ -67,9 +67,9 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
         <img src="/me.jpg" alt="Brendan Rudberg's headshot" class="headshot" />
 
         <p>
-          My name is Brendan and I'm an rising junior at Caltech.
+          My name is Brendan and I'm an rising junior at Caltech with a 4.0 GPA.
           I'm majoring in mechanical engineering with an interest in robotics and control systems.
-          I'm currently working on state space models for thermal systems, as well as serving as the president of Caltech Racing, a rapidly growing formula SAE electric team.
+          I'm currently working on modeling the dynamics of Daedalus 3, a starship style drone, as well as serving as the president of Caltech Racing, a rapidly growing formula SAE electric team.
           In my free time you'll find me bouldering, pole vaulting, cooking, or playing Clash Royale.  
           Scroll down to see some of the projects I've worked on!
         </p>
@@ -115,9 +115,9 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
             <figcaption>Double pendulum hardware demonstration. The control loop is a work in progress!</figcaption>
           </figure>
           <ul>
-            <li>In a team of six, designed and built a cart-pole system that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
+            <li>In a team of six, designed and built an inverted pendulum on a cart that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
             <li>Architected the full control stack: an energy-based swing-up controller with an energy-gated handoff to an LQR balancing controller, so the system transitions automatically once the pendulum enters the capture region near vertical.</li>
-            <li>Implemented state estimation with a Kalman filter fusing encoder position and velocity, tuned to reject quantization noise without lagging the fast pole dynamics.</li>
+            <li>Implemented state estimation with a Kalman filter fusing encoder position and velocity, tuned to reject quantization noise without lagging the fast dynamics.</li>
             <li>Built the hardware around a NEMA 17 stepper driven by a TMC2209, AMT10E2-V encoders for cart and pendulum angle, and an Arduino Nano ESP32 running the real-time loop.</li>
             <li>Pivoted the actuation from a BLDC/SimpleFOC/Teensy stack to the stepper architecture after field-oriented control proved unreliable, recovering the timeline without dropping the demo target.</li>
           </ul>
@@ -173,9 +173,7 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
           <ul>
             <li> Designed and built a two-speed passive-shifting transmission with a six-person team for the ME14 design competition under a $250 budget. </li>
             <li> Selected a 9:1 / 5.04:1 dual-ratio architecture from a MATLAB sweep of gear ratio vs. drivetrain efficiency, with roller-clutch freewheeling on both stages to enable passive shifting via motor reversal. </li>
-            <li> Sized the high-speed stage with a GT3 3 mm belt using a custom gear-belt solver to resolve the 0.005" center-distance mismatch between meshed gears and a tensioned belt sharing the same shafts. </li>
             <li> Replaced a four-part keyed hub with a press-fit acetal-on-steel joint, verified by Lamé analysis (SF ≈ 13-14 on radial stress, ≈ 2-3 on transmitted torque), cutting machining from 4 parts to 2. </li>
-            <li> Ran combined-loading FEA on the output shaft in Ansys (13.7 MPa max von Mises), validating the press-fit design against the original keyed-shaft approach. </li>
             <li> Won 1st place in the ME14 design competition on combined acceleration and steady-state power. </li>
           </ul>
         </article>

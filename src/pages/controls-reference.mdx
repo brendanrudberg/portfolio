@@ -5,17 +5,150 @@ title: "Controls Reference — Brendan Rudberg"
 
 <div class="reference">
 
-# A CTSM Reference
+# A Control Theory Reference
 
 I'm learning Continuous Time Stochastic Modeling (CTSM) for a research project.
-This relies on the Extended Kalman Filter (EKF) to work. In order to ensure I
-fully understand it, I'm adding a section to my website containing notes to 
-solidify my understanding. This also serves as a reference for my future self.
+This relies on the Extended Kalman Filter (EKF) to work. 
+I'm adding a section to my website containing notes to 
+solidify my understanding of control theory. 
+This also serves as a reference for my future self.
+
+## Autonomous Systems
+A function is a mapping from an input to an output.
+
+$$
+f(x) = x^2
+$$
+
+If we want to describe an object, we often need more than one variable. 
+These can all be stored in $x$, making it a vector. This is known as the 
+state. The state of a pendulum for example is:
+
+$$
+x = [\theta, \dot{\theta}]^T
+$$
+
+What if we want a function that describes the state of an object over time?
+This would take the form $x(t)$.
+However, functions like these are often incredibly difficult to derive. 
+It's often much easier to write a function that describes what's happening to a state at any point in time. 
+
+$$
+\dot{x} = f(x)
+$$
+
+This is known as the dynamics of an object. 
+An object with dynamics is known as a system.
+The dynamics of the pendulum, for example, is just one function:
+
+$$
+\ddot{\theta} = -\frac{g}{L}\sin(\theta)
+$$
+
+This means that the velocity of the pendulum changes as a function of the position.
+To define the state of the pendulum, we only include variables we care about.
+Looking at the dynamics, we need the angle $\theta$. 
+However, we also need the $\dot{\theta}$, since this controls how position evolves.
+You can see this if you try to integrate $\ddot{\theta}$: the constant $\dot{\theta}(0)$ appears.
+
+Why not include angular acceleration? 
+A state can include any number of variables like acceleration, jerk, snap, the earth's velocity, magnetic flux, etc.
+However, we typically only include the variables that govern how the object evolves. 
+In the case of a pendulum, we don't need to know angular acceleration in order to determine what happens next.
+
+A state space is the collection of all possible states a system might have.
+In the case of the pendulum, the state space is:
+
+$$
+[[0, 2\pi), \mathbb{R}]
+$$
+
+## Linear Systems
+Earlier, we said that helpful to describe our system with one ore more differential equations:
+
+$$
+\dot{x} = f(x)
+$$
+
+However, these equations are unwieldy when you have a lot of state vectors.
+When your system is linear (every variable evolves as a scalar times a combination of other variables), you can describe your dynamics with a matrix, A:
+
+$$
+\dot{x} = Ax
+$$
+
+A is known as the control matrix. It must be an $n \times n$ matrix. 
+
+## Controllability
+Up until now, we've been describing an autonomous system. 
+If the system has an external influence, it's known as a controlled system. 
+The ways a system is influenced can be described in an input (or control) vector $u$.
+The input vector usually contains different variables than the state vector.
+It also changes over time, making it a function of $t$, just like $x$. 
+Unlike the state vector, it's described without a differential equation, since it's not determined by the system. 
+The input vector on a controlled pendulum might the torque on the pivot:
+
+$$u(t) = [\tau(t)]$$
+
+Our equation now needs to account for this input vector.
+
+$$
+\dot{x} = f(x, u)
+$$
+
+If our system is linear we can write this as:
+
+$$
+\dot{x} = Ax + Bu 
+$$
+
+B is known as the input matrix, how the state changes as a result of the input.
+It must be an $n \times m$ matrix.
+
+So what does controllability mean?
+It turns out there's a very precise definition: 
+A system is controllable if you can get to any state, from any state, given a finite time.
+An uncontrollable system means there are some states you can't get to no matter how long you have. 
+For example, in a system of two pendulums with one torque driving both identically, you can never reach a state where
+the two pendulums have different angles or different angular velocities. 
+
+How do you prove a system is controllable? 
+Consider the input matrix $B$. By choosing your input carefully, you can get to the subspace $Bu$.
+Since $u$ is any input, we can consider the subspace itself just to be the span of $B$s columns.
+However, in most cases, this isn't enough to get to every state in your state space. 
+In our earlier example, you need to arrive at any target position and any target velocity given a torque input. 
+This means you want to control two state variables using one input. 
+This is only possible due to the way the system evolves over time. 
+
+If you consider how the dynamics act on $B$ over time, you get $AB$, another subspace. 
+If you consider how the dynamics act on this new subspace, you get $A^2B$, which is a different subspace.
+This process can be continued for any number of $A$s. 
+However, once you reach $A^nB$, this can be written as a combination of the other state spaces.
+As a result, any matrix from $A^{n}B$ and beyond doesn't tell you anything about whether your system is controllable. 
+
+$B$, $AB$ ... $A^n-1B$ are all $n \times m$ matrices and all tell us something.
+We care about whether the union of all these possible control matrices let us reach our full state space.
+To do this, we can put them into a single matrix, known as the controllability matrix. This is $n \times nm$ 
+
+$$
+\mathcal{C} = \begin{bmatrix} B & AB & A^2B & \cdots & A^{n-1}B \end{bmatrix}
+$$
+
+When combining the columns of this matrix, there could be a direction you never reach. 
+This would mean the system is uncontrollable. 
+The missed columns and the column span are orthogonal complements, so this is equivalent to the rows being linearly dependent. 
+Conversely, If every row in our $\mathcal{C}$ is linearly independent, than we our system is controllable. 
+The clean definition of this is: If our $\mathcal{C}$ is full rank, the system is controllable.
 
 
-A function is a mapping from an input to an output. Take the sin function:
 
-$$f(x) = sin(x)$$
+
+## PID
+How do you choose a good input vector? 
+It depends on what you want your system to do. 
+Once you know this, a simple way to determine the input vector is known as Proportional-Integral-Derivative (PID)
+PID does one thing: it minimizes the error of a 
+
 
 </div>
 

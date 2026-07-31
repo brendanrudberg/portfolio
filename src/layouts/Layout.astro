@@ -57,7 +57,10 @@ const title = frontmatter?.title ?? Astro.props.title ?? `${name} — ${tagline}
 </style>
 
 <style is:global>
-	
+  .katex-display {
+    text-align: center !important;
+    margin: 1.5rem 0;
+  }
   .reference { max-width: 780px; margin: 0 auto; padding: 3rem 2rem; }
   .reference h1 { font-size: 2.5rem; margin: 0 0 0.5rem; }
   .reference h2 { font-size: 1.75rem; margin-top: 2rem; }

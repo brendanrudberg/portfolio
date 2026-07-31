@@ -4,9 +4,11 @@ import Footer from '../components/footer.astro';
 
 const name = "Brendan Rudberg";
 const tagline = "Mechanical Engineering @ Caltech — Controls & Robotics";
-const { title = `${name} — ${tagline}` } = Astro.props;
 const github = "https://github.com/brendanrudberg";
 const linkedin = "https://www.linkedin.com/in/brendanrudberg";
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? Astro.props.title ?? `${name} — ${tagline}`;
 ---
 
 <!doctype html>
@@ -51,4 +53,11 @@ const linkedin = "https://www.linkedin.com/in/brendanrudberg";
     color: #111;
     background: #fff;
   }
+</style>
+
+<style is:global>
+  .reference { max-width: 780px; margin: 0 auto; padding: 3rem 2rem; }
+  .reference h1 { font-size: 2.5rem; margin: 0 0 0.5rem; }
+  .reference h2 { font-size: 1.75rem; margin-top: 2rem; }
+  .reference h3 { margin-bottom: 0.5rem; }
 </style>

@@ -9,16 +9,13 @@ title: "Controls Reference — Brendan Rudberg"
 
 I'm learning Continuous Time Stochastic Modeling (CTSM) for a research project.
 This relies on the Extended Kalman Filter (EKF) to work. In order to ensure I
-fully understand it, I'm adding a section to my website breaking everything down
-as simply as I can make it. This also serves as a reference for my future self.
+fully understand it, I'm adding a section to my website containing notes to 
+solidify my understanding. This also serves as a reference for my future self.
 
-The prediction step propagates the estimate through the process model,
 
-$$
-\hat{x}_{k|k-1} = f(\hat{x}_{k-1|k-1},\, u_k)
-$$
+A function is a mapping from an input to an output. Take the sin function:
 
-and the covariance follows as $P_{k|k-1} = F_k P_{k-1|k-1} F_k^\top + Q_k$.
+$$f(x) = sin(x)$$
 
 </div>
 

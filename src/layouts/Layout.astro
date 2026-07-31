@@ -1,52 +1,52 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
+
 const name = "Brendan Rudberg";
 const tagline = "Mechanical Engineering @ Caltech — Controls & Robotics";
+const { title = `${name} — ${tagline}` } = Astro.props;
 const github = "https://github.com/brendanrudberg";
 const linkedin = "https://www.linkedin.com/in/brendanrudberg";
 ---
 
-<Layout>
-  <nav class="nav">
-
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="/BR.png" />
-<title>{name} — {tagline}</title>
-<meta name="description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics. Projects include Starship style drone design, an inverted pendulum control system, FSAE Electric race car hardware" />
-<link rel="canonical" href="https://brendanrudberg.com/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/BR.png" />
+  <title>{title}</title>
+  <meta name="description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics. Projects include Starship style drone design, an inverted pendulum control system, FSAE Electric race car hardware" />
+  <link rel="canonical" href="https://brendanrudberg.com/" />
 
-<!-- Open Graph / Twitter Card -->
-<meta property="og:title" content={`${name} — ${tagline}`} />
-<meta property="og:description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics." />
-<meta property="og:image" content="https://brendanrudberg.com/me.jpg" />
-<meta property="og:url" content="https://brendanrudberg.com/" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:title" content={`${name} — ${tagline}`} />
+  <meta property="og:description" content="Portfolio of Brendan Rudberg, Caltech mechanical engineering student focused on controls and robotics." />
+  <meta property="og:image" content="https://brendanrudberg.com/me.jpg" />
+  <meta property="og:url" content="https://brendanrudberg.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<!-- Structured data -->
-<script type="application/ld+json" set:html={JSON.stringify({
-	"@context": "https://schema.org",
-	"@type": "Person",
-	"name": name,
-	"jobTitle": "Mechanical Engineering Student",
-	"affiliation": "California Institute of Technology",
-	"url": "https://brendanrudberg.com/",
-	"sameAs": [github, linkedin]
-})} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": name,
+    "jobTitle": "Mechanical Engineering Student",
+    "affiliation": "California Institute of Technology",
+    "url": "https://brendanrudberg.com/",
+    "sameAs": [github, linkedin]
+  })} />
 </head>
-	<body>
-		<slot />
-</Layout>
+<body>
+  <Navbar />
+  <slot />
+</body>
+</html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html, body {
+    margin: 0;
+    font-family: -apple-system, system-ui, sans-serif;
+    line-height: 1.6;
+    color: #111;
+    background: #fff;
+  }
 </style>

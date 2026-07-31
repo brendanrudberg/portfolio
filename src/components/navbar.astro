@@ -1,0 +1,35 @@
+---
+// src/components/Navbar.astro
+const name = "Brendan Rudberg";
+const github = "https://github.com/brendanrudberg";
+const linkedin = "https://www.linkedin.com/in/brendanrudberg";
+---
+
+<nav class="nav">
+  <a href="/#about" class="brand">{name}</a>
+  <div class="links">
+    <a href="/#about">About</a>
+    <a href="/#projects">Projects</a>
+    <a href="/controls-reference">Controls Reference</a>
+    <a href={github} target="_blank" rel="noopener">GitHub</a>
+    <a href={linkedin} target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</nav>
+
+<style>
+      .nav {
+        position: sticky; top: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1rem 2rem;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        z-index: 10;
+      }
+      .nav .brand { font-weight: 600; text-decoration: none; color: #111; }
+      .nav .links a {
+        margin-left: 1.5rem;
+        text-decoration: none;
+        color: #444;
+      }
+      .nav .links a:hover { color: #000; }
+</style>

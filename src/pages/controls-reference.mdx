@@ -1,0 +1,35 @@
+---
+const name = "Brendan Rudberg";
+const tagline = "Mechanical Engineering @ Caltech — Controls & Robotics";
+const github = "https://github.com/brendanrudberg";
+const linkedin = "https://www.linkedin.com/in/brendanrudberg";
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? Astro.props.title ?? `${name} — ${tagline}`;
+---
+
+<div class="reference">
+
+# A CTSM Reference
+
+I'm learning Continuous Time Stochastic Modeling (CTSM) for a research project.
+This relies on the Extended Kalman Filter (EKF) to work. In order to ensure I
+fully understand it, I'm adding a section to my website breaking everything down
+as simply as I can make it. This also serves as a reference for my future self.
+
+The prediction step propagates the estimate through the process model,
+
+$$
+\hat{x}_{k|k-1} = f(\hat{x}_{k-1|k-1},\, u_k)
+$$
+
+and the covariance follows as $P_{k|k-1} = F_k P_{k-1|k-1} F_k^\top + Q_k$.
+
+</div>
+
+<style>
+  .reference { max-width: 780px; margin: 0 auto; padding: 3rem 2rem; }
+  .reference h1 { font-size: 2.5rem; margin: 0 0 0.5rem; }
+  .reference h2 { font-size: 1.75rem; margin-top: 2rem; }
+  .reference h3 { margin-bottom: 0.5rem; }
+</style>

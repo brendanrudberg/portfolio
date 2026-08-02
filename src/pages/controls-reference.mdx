@@ -77,7 +77,8 @@ $$
 \dot{x} = Ax
 $$
 
-A is known as the control matrix. It must be an $n \times n$ matrix. 
+A is known as the state matrix. 
+It must be an $n \times n$ matrix because it's transforming $x$ of size $n$ into the change in $x$, also of size $n$.
 
 ## Controllability
 Up until now, we've been describing an autonomous system. 
@@ -86,7 +87,7 @@ The ways a system is influenced can be described in an input (or control) vector
 The input vector usually contains different variables than the state vector.
 It also changes over time, making it a function of $t$, just like $x$. 
 Unlike the state vector, it's described without a differential equation, since it's not determined by the system. 
-The input vector on a controlled pendulum might the torque on the pivot:
+The input vector on a controlled pendulum might be the torque on the pivot:
 
 $$u(t) = [\tau(t)]$$
 
@@ -103,7 +104,7 @@ $$
 $$
 
 B is known as the input matrix, how the state changes as a result of the input.
-It must be an $n \times m$ matrix.
+It must be an $n \times m$ matrix becuase it's transforming $u$ of size $m$ into $x$ of size $n$.
 
 So what does controllability mean?
 It turns out there's a very precise definition: 
@@ -113,34 +114,92 @@ For example, in a system of two pendulums with one torque driving both identical
 the two pendulums have different angles or different angular velocities. 
 
 How do you prove a system is controllable? 
-Consider the input matrix $B$. By choosing your input carefully, you can get to the subspace $Bu$.
-Since $u$ is any input, we can consider the subspace itself just to be the span of $B$s columns.
+Consider the input matrix $B$. By choosing your input carefully, you can get to the direction $Bu$.
+Since $u$ is any input, we can consider the set of achievable directions to just be the span of $B$'s columns.
 However, in most cases, this isn't enough to get to every state in your state space. 
-In our earlier example, you need to arrive at any target position and any target velocity given a torque input. 
+In our earlier example, you need to arrive at any target angle and any target angular velocity given a single torque input. 
 This means you want to control two state variables using one input. 
 This is only possible due to the way the system evolves over time. 
 
-If you consider how the dynamics act on $B$ over time, you get $AB$, another subspace. 
-If you consider how the dynamics act on this new subspace, you get $A^2B$, which is a different subspace.
-This process can be continued for any number of $A$s. 
-However, once you reach $A^nB$, this can be written as a combination of the other state spaces.
+If you consider how the dynamics act on $B$ over time, you get $AB$, the first order term of how the input's reach develops. 
+If you consider how the dynamics act on this new matrix, you get $A^2B$, the second order term of how the input's reach develops. 
+This process can be continued for any number of $A$s.  
+Multiplying by A either adds a new direction or the direction is contained in the current span.
+As soon as the direction is contained in the current span, the span is closed under $A$, so further multiplying $A$ can't increase the dimension.
+Since the state space is $n$-dimensional, the closure happens within $n$ blocks, so $A^{n-1}B$ is the last block that can increase the rank.
+Therefore, once you reach $A^nB$, this can be written as a combination of lower order terms.
+This is an application of the Cayley-Hamilton theorem, which states that $A^n$ is a combination of lower order powers.
 As a result, any matrix from $A^{n}B$ and beyond doesn't tell you anything about whether your system is controllable. 
 
-$B$, $AB$ ... $A^n-1B$ are all $n \times m$ matrices and all tell us something.
-We care about whether the union of all these possible control matrices let us reach our full state space.
-To do this, we can put them into a single matrix, known as the controllability matrix. This is $n \times nm$ 
+$B$, $AB$ ... $A^{n-1}B$ are all $n \times m$ matrices and all tell us something.
+We care about whether the span of all these possible directions let us reach our full state space.
+To do this, we can put them into a single matrix, known as the controllability matrix. This is $n \times nm$.
 
 $$
 \mathcal{C} = \begin{bmatrix} B & AB & A^2B & \cdots & A^{n-1}B \end{bmatrix}
 $$
 
-When combining the columns of this matrix, there could be a direction you never reach. 
-This would mean the system is uncontrollable. 
-The missed columns and the column span are orthogonal complements, so this is equivalent to the rows being linearly dependent. 
-Conversely, If every row in our $\mathcal{C}$ is linearly independent, than we our system is controllable. 
-The clean definition of this is: If our $\mathcal{C}$ is full rank, the system is controllable.
+The columns of $\mathcal{C}$ are possible directions achievable by the system. 
+The total space of achievable directions is simply any combination of these directions, with a dimension of $\text{rank}(\mathcal{C})$
+This space only covers the full state space when $\text{rank}(\mathcal{C}) = n$
+In other words: If our $\mathcal{C}$ is full rank, the system is controllable.
 
+## Observability
+How do you know what your system is actually doing?
+One way to answer this question is to take readings of your system using sensors like encoders.
+These readings can be stored in an output vector $y$.
+$y$ usually has different variables than $x$ or $u$. 
+The output $y$ is a function of the state $x$, which means as the state changes, the output also changes.
 
+$$
+y = g(x)
+$$
+
+$y$ can also be expressed as a linear function:
+
+$$
+y = Cx
+$$
+
+C is known as the output matrix. 
+It must be a $k \times n$ matrix because it's transforming the $x$ of size $n$ into $y$ of size $k$.
+
+So what does observability mean?
+A system is observable if you can construct the full state based on the output $y$ over a finite time. 
+A system is unobservable if you can't construct a full state, no matter how long you have.
+An unobservable system might be two identical pendulums with a sensor that measures the sum of their angles. 
+In this case, if the pendulums are decoupled, it's impossible to determine what their individual angles are. 
+
+How to prove a system is observable?
+There's an interesting duality between observability and controllability.
+Consider the output matrix $C$.
+To provide you with the output for a given $x$, the state is multiplied by $C$ to produce the direction $Cx$. 
+In many cases, this vector isn't enough information to determine your original state.
+Like $u$, $y$ often has fewer variables than $x$, making $y$ underdetermined. 
+To continue our pendulum example, the hinge might have a single gyroscope providing you with angular velocity. 
+As a result, you need to construct both angle and angular velocity from a single angular velocity variable. 
+
+If you consider how $C$ acts on the dynamics, you get $CA$, the map from $x$ to $\dot{y}$. 
+If you consider how this new map acts on the dynamics you get $CA^2$, the map from $x$ to $\ddot{y}$. 
+Just like when determining controllability, this process can be continued for any number of $A$s. 
+Similarly, once you reach $CA^n$, this can be written as a combination of the maps.
+In another application of Cayley-Hamilton, any matrix from $CA^{n}$ and beyond doesn't tell you anything about whether your system is observable. 
+
+$C$, $CA$ ... $CA^{n-1}$ are all $k \times n$ matrices and all tell us something.
+We care about whether the span of the rows can jointly distinguish every state.
+To do this, we can put them into a single matrix, known as the observability matrix $\mathcal{O}$. 
+This is $nk \times n$.
+$\mathcal{O}$ stacks rows rather than columns.
+
+$$
+\mathcal{O} = \begin{bmatrix} C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1} \end{bmatrix}
+$$
+
+Like $\mathcal{C}$, when combining the columns of this matrix, there could be a direction you can never distinguish.
+This would mean the system is unobservable. 
+If every column in our $\mathcal{O}$ is linearly independent, then you can distinguish every direction, so our system is observable. 
+The clean definition of this is: If our $\mathcal{O}$ is full rank, the system is observable.
+The symmetry between $\mathcal{C}$ and $\mathcal{O}$ is undeniable! 
 
 
 ## PID

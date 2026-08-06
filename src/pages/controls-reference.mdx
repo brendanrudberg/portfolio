@@ -64,7 +64,7 @@ $$
 $$
 
 ## Linear Systems
-Earlier, we said that helpful to describe our system with one ore more differential equations:
+Earlier, we said that it's helpful to describe our system with one or more differential equations:
 
 $$
 \dot{x} = f(x)
@@ -104,7 +104,7 @@ $$
 $$
 
 B is known as the input matrix, how the state changes as a result of the input.
-It must be an $n \times m$ matrix becuase it's transforming $u$ of size $m$ into $x$ of size $n$.
+It must be an $n \times m$ matrix because it's transforming $u$ of size $m$ into $x$ of size $n$.
 
 So what does controllability mean?
 It turns out there's a very precise definition: 
@@ -195,12 +195,11 @@ $$
 \mathcal{O} = \begin{bmatrix} C \\ CA \\ CA^2 \\ \vdots \\ CA^{n-1} \end{bmatrix}
 $$
 
-Like $\mathcal{C}$, when combining the columns of this matrix, there could be a direction you can never distinguish.
-This would mean the system is unobservable. 
-If the columns in our $\mathcal{O}$ is linearly independent, then you can distinguish every direction, so our system is observable. 
-The clean definition of this is: If our $\mathcal{O}$ is full rank, the system is observable.
+Like $\mathcal{C}$, the rows of $\mathcal{O}$ are directions in state-space measurable by the system. 
+The span of these rows is simply any combination of these directions, with a dimension of $\text{rank}(\mathcal{O})$
+This space only covers the full state space when $\text{rank}(\mathcal{O}) = n$.
+In other words: If our $\mathcal{O}$ is full rank, the system is observable.
 The symmetry between $\mathcal{C}$ and $\mathcal{O}$ is undeniable! 
-
 
 </div>
 

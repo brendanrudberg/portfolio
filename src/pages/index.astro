@@ -59,6 +59,21 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
     <section id="projects">
       <h2>Projects</h2>
 
+      <!-- Project -1 -->
+      <article class="project" id="stochastic-state-space-modelling">
+        <h3>Stochastic State Space Modelling</h3>
+        <figure class="project-figure">
+          <img src="/temperature_data.png" alt="Temperature data from four sensors" />
+          <figcaption>One month of data from four temperature sensors measuring components of a building envelope in Reykjavik.</figcaption>
+        </figure>
+        <ul>
+          <li>Formulated grey-box RC-network state-space models of the building's thermal dynamics, using a lumped-parameter structure simple enough to keep every parameter physically interpretable while still capturing the dominant heat-transfer behavior.</li>
+          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean, continuous temperature dataset as the basis for system identification.</li>
+          <li>Implementing continuous-time stochastic modeling (CTSM) to estimate the model parameters from the logged data, working through the identification pipeline on progressively richer model structures.</li>
+          <li>Benchmarking the grey-box models against white-box baselines (a persistence floor and static linear regression) and black-box sequence models (LSTM, Mamba, S4) to map the interpretability-versus-accuracy tradeoff between physics-based and learned approaches.</li>
+        </ul>
+      </article>
+
       <!-- Project 0 -->
       <article class="project" id="daedalus-3">
         <h3>Daedalus 3 Flap Design</h3>
@@ -112,7 +127,7 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
         <h3>Caltech Racing — FSAE Electric</h3>
         <figure class = "project-figure2">
           <img src="/racecar.jpg" alt="Formula SAE electric racecar" />
-          <figcaption>The rolling chassis we brought to the 2026 competition in Michigan. Unfortunately couldn't get it powered in time.</figcaption>
+          <figcaption>The rolling chassis we brought to the 2026 competition in Michigan. </figcaption>
         </figure>
         <figure class="project-figure">
           <img src="/HV Enclosure Front.jpg" alt="High voltage enclosure front" />

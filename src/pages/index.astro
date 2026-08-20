@@ -48,8 +48,9 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
 
       <p>
         My name is Brendan and I'm a rising junior at Caltech with a 4.0 GPA.
-        I'm currently working on modeling the dynamics of Daedalus 3, a Starship-style drone, as well as serving as the president of Caltech Racing, a rapidly growing formula SAE electric team.
-        I'm majoring in mechanical engineering with an interest in robotics and control systems.
+        I'm currently comparing data-driven and physics-based models for thermal systems
+        and serving as the president of Caltech Racing, a rapidly growing formula SAE electric team.
+        I'm majoring in mechanical engineering with a minor in robotics and a focus on control systems.
         In my free time you'll find me bouldering, pole vaulting, cooking, or playing Clash Royale.  
         Scroll down to see some of the projects I've worked on!
       </p>
@@ -63,14 +64,19 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
       <article class="project" id="stochastic-state-space-modelling">
         <h3>Stochastic State Space Modelling</h3>
         <figure class="project-figure">
-          <img src="/temperature_data.png" alt="Temperature data from four sensors" />
-          <figcaption>One month of data from four temperature sensors measuring components of a building envelope in Reykjavik.</figcaption>
+          <img src="/prediction_RC_2c_G_geo_test.png" alt="RC model comparison to results" />
+          <figcaption>2-capacitor RC model compared to experimental results on the test dataset.</figcaption>
+        </figure>
+        <figure class="project-figure">
+          <img src="/solar_comparison.png" alt="Solar irradiance transformation" />
+          <figcaption>Solar irradiance data, before and after geometric transformation.</figcaption>
         </figure>
         <ul>
-          <li>Formulated grey-box RC-network state-space models of the building's thermal dynamics, using a lumped-parameter structure simple enough to keep every parameter physically interpretable while still capturing the dominant heat-transfer behavior.</li>
-          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean, continuous temperature dataset as the basis for system identification.</li>
-          <li>Implementing continuous-time stochastic modeling (CTSM) to estimate the model parameters from the logged data, working through the identification pipeline on progressively richer model structures.</li>
-          <li>Benchmarking the grey-box models against white-box baselines (a persistence floor and static linear regression) and black-box sequence models (LSTM, Mamba, S4) to map the interpretability-versus-accuracy tradeoff between physics-based and learned approaches.</li>
+          <li>Formulated grey-box RC-network state-space models of the building envelope's thermal dynamics, with air temperatures as boundary inputs and wall temperatures as observed states, keeping the lumped-parameter structure physically interpretable while capturing the dominant heat-transfer behavior.</li>
+          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean, 30-day passively-excited temperature dataset as the basis for system identification.</li>
+          <li>Transposed horizontal solar irradiance onto the wall plane using solar geometry (sun position, angle of incidence), correcting for the mismatch between the horizontal sensor and the vertical building envelope."</li>
+          <li>Identified the grey-box wall model via maximum-likelihood estimation with continuous-time stochastic modeling (CTSM), using a forward-selection procedure over increasingly complex RC networks.</li>
+          <li>Benchmarking against a graded lineup, persistence and static-linear baselines, a linear black-box state-space model, and learned architectures (LSTM, S4), so that held-out multi-step prediction error attributes to a single modeling ingredient at each rung.</li>
         </ul>
       </article>
 
@@ -171,7 +177,7 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
         </figure>
         <ul>
           <li> Designed and built a two-speed passive-shifting transmission with a six-person team for the ME14 design competition under a $250 budget. </li>
-          <li> Selected a 9:1 / 5.04:1 dual-ratio architecture from a MATLAB sweep of gear ratio vs. drivetrain efficiency, with roller-clutch freewheeling on both stages to enable passive shifting via motor reversal. </li>
+          <li> Implemented a roller-clutch freewheeling mechanism on both stages to enable passive shifting via motor reversal. </li>
           <li> Replaced a four-part keyed hub with a press-fit acetal-on-steel joint, verified by Lamé analysis (SF ≈ 13-14 on radial stress, ≈ 2-3 on transmitted torque), cutting machining from 4 parts to 2. </li>
           <li> Won 1st place in the ME14 design competition on combined acceleration and steady-state power. </li>
         </ul>
@@ -187,8 +193,6 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
         <ul>
           <li>Designed and implemented a real-time vision-based object tracking robot using camera input and motorized actuation.</li>
           <li>Performed color-based segmentation by converting RGB frames to binary masks isolating target objects by color and size.</li>
-          <li>Applied morphological operations (erosion and dilation) to denoise binary images and improve object detection robustness.</li>
-          <li>Identified and tracked the largest connected component to prioritize the closest target in multi-object scenes.</li>
           <li>Computed object centroids and mapped image-space coordinates to relative positional error for closed-loop control.</li>
           <li>Generated smooth motor trajectories using spline interpolation for stable camera and platform motion.</li>
           <li>Developed a multithreaded software architecture enabling concurrent image acquisition, processing, and motor control.</li>

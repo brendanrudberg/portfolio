@@ -64,19 +64,20 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
       <article class="project" id="stochastic-state-space-modeling">
         <h3>Stochastic State Space Modeling</h3>
         <figure class="project-figure">
-          <img src="/prediction_RC_2c_G_geo_test.png" alt="RC model comparison to results" />
-          <figcaption>2-capacitor RC model compared to experimental results on the test dataset.</figcaption>
+          <img src="/prediction_overlay_geo_test.png" alt="RC and LSTM model comparison to results" />
+          <figcaption>2-capacitor RC model compared to LSTM and experimental results on the test dataset.</figcaption>
         </figure>
         <figure class="project-figure">
           <img src="/solar_comparison.png" alt="Solar irradiance transformation" />
           <figcaption>Solar irradiance data, before and after geometric transformation.</figcaption>
         </figure>
         <ul>
-          <li>Formulated grey-box RC-network state-space models of the building envelope's thermal dynamics, with air temperatures as boundary inputs and wall temperatures as observed states, keeping the lumped-parameter structure physically interpretable while capturing the dominant heat-transfer behavior.</li>
-          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean, 30-day passively-excited temperature dataset as the basis for system identification.</li>
-          <li>Transposed horizontal solar irradiance onto the wall plane using solar geometry (sun position, angle of incidence), correcting for the mismatch between the horizontal sensor and the vertical building envelope.</li>
-          <li>Identified the grey-box wall model via maximum-likelihood estimation in continuous-time stochastic modeling (CTSM), comparing RC networks of increasing order by residual autocorrelation (whiteness) diagnostics.</li>
-          <li>Currently benchmarking against a graded lineup, persistence and static-linear baselines, a linear black-box state-space model, and learned architectures (LSTM, S4), so that held-out multi-step prediction error attributes to a single modeling ingredient at each rung.</li>
+          <li>Formulated grey-box RC-network state-space models of the building envelope's thermal dynamics, with air temperatures as boundary inputs and wall temperatures as observed states, keeping the lumped-parameter structure physically interpretable.</li>
+          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean 30-day passively-excited dataset for system identification.</li>
+          <li>Transposed horizontal solar irradiance onto the wall plane via solar geometry (sun position, angle of incidence), correcting for the horizontal-sensor / vertical-envelope mismatch.</li>
+          <li>Identified the wall model by maximum-likelihood estimation in continuous-time stochastic modeling (CTSM), comparing RC networks of increasing order by residual whiteness diagnostics.</li>
+          <li>Benchmarked against a graded lineup (persistence, static-linear, black-box state-space, and an LSTM) so held-out multi-step prediction error attributes to a single modeling ingredient at each rung.</li>
+          <li>7-parameter grey-box matched the LSTM's out-of-sample accuracy where inputs were well-characterized and generalized more stably, while the LSTM led where drivers were unmeasured, quantifying the interpretability vs flexibility tradeoff.</li>
         </ul>
       </article>
 

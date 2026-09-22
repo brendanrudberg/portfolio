@@ -47,7 +47,7 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
       <img src="/me.jpg" alt="Brendan Rudberg's headshot" class="headshot" />
 
       <p>
-        My name is Brendan and I'm a rising junior at Caltech with a 4.0 GPA.
+        My name is Brendan and I'm a junior at Caltech with a 4.0 GPA.
         I'm currently comparing data-driven and physics-based models for thermal systems
         and serving as the president of Caltech Racing, a rapidly growing formula SAE electric team.
         I'm majoring in mechanical engineering with a minor in robotics and a focus on control systems.
@@ -59,28 +59,6 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
     <!-- ============ PROJECTS ============ -->
     <section id="projects">
       <h2>Projects</h2>
-
-      <!-- Project -1 -->
-      <article class="project" id="stochastic-state-space-modeling">
-        <h3>Stochastic State Space Modeling</h3>
-        <figure class="project-figure">
-          <img src="/prediction_overlay_geo_test.png" alt="RC and LSTM model comparison to results" />
-          <figcaption>2-capacitor RC model compared to LSTM and experimental results on the test dataset.</figcaption>
-        </figure>
-        <figure class="project-figure">
-          <img src="/solar_comparison.png" alt="Solar irradiance transformation" />
-          <figcaption>Solar irradiance data, before and after geometric transformation.</figcaption>
-        </figure>
-        <ul>
-          <li>Formulated grey-box RC-network state-space models of the building envelope's thermal dynamics, with air temperatures as boundary inputs and wall temperatures as observed states, keeping the lumped-parameter structure physically interpretable.</li>
-          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean 30-day passively-excited dataset for system identification.</li>
-          <li>Transposed horizontal solar irradiance onto the wall plane via solar geometry (sun position, angle of incidence), correcting for the horizontal-sensor / vertical-envelope mismatch.</li>
-          <li>Identified the wall model by maximum-likelihood estimation in continuous-time stochastic modeling (CTSM), comparing RC networks of increasing order by residual whiteness diagnostics.</li>
-          <li>Benchmarked against a graded lineup (persistence, static-linear, black-box state-space, and an LSTM) so held-out multi-step prediction error attributes to a single modeling ingredient at each rung.</li>
-          <li>7-parameter grey-box matched the LSTM's out-of-sample accuracy where inputs were well-characterized and generalized more stably, while the LSTM led where drivers were unmeasured, quantifying the interpretability vs flexibility tradeoff.</li>
-        </ul>
-      </article>
-
       <!-- Project 0 -->
       <article class="project" id="daedalus-3">
         <h3>Daedalus 3 Flap Design</h3>
@@ -110,6 +88,27 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
         </ul>
       </article>
 
+      <!-- Project -1 -->
+      <article class="project" id="stochastic-state-space-modeling">
+        <h3>Stochastic State Space Modeling</h3>
+        <figure class="project-figure">
+          <img src="/prediction_overlay_geo_test.png" alt="RC and LSTM model comparison to results" />
+          <figcaption>2-capacitor RC model compared to LSTM and experimental results on the test dataset.</figcaption>
+        </figure>
+        <figure class="project-figure">
+          <img src="/solar_comparison.png" alt="Solar irradiance transformation" />
+          <figcaption>Solar irradiance data, before and after geometric transformation.</figcaption>
+        </figure>
+        <ul>
+          <li>Formulated grey-box RC-network state-space models of the building envelope's thermal dynamics, with air temperatures as boundary inputs and wall temperatures as observed states, keeping the lumped-parameter structure physically interpretable.</li>
+          <li>Instrumented the envelope with four DS18B20 1-Wire sensors logging to a Raspberry Pi, producing a clean 30-day passively-excited dataset for system identification.</li>
+          <li>Transposed horizontal solar irradiance onto the wall plane via solar geometry (sun position, angle of incidence), correcting for the horizontal-sensor / vertical-envelope mismatch.</li>
+          <li>Identified the wall model by maximum-likelihood estimation in continuous-time stochastic modeling (CTSM), comparing RC networks of increasing order by residual whiteness diagnostics.</li>
+          <li>Benchmarked against a graded lineup (persistence, static-linear, black-box state-space, and an LSTM) so held-out multi-step prediction error attributes to a single modeling ingredient at each rung.</li>
+          <li>7-parameter grey-box matched the LSTM's out-of-sample accuracy where inputs were well-characterized and generalized more stably, while the LSTM led where drivers were unmeasured, quantifying the interpretability vs flexibility tradeoff.</li>
+        </ul>
+      </article>
+
       <!-- Project 1 -->
       <article class="project" id="inverted-pendulum">
         <h3>Inverted Pendulum</h3>
@@ -118,7 +117,7 @@ M_{\text{hinge},i} = \tfrac{1}{2}\rho\, v_z|v_z|\, S_i C_{N,i}\sin\theta\cos\del
           <figcaption>Energy-based swing-up handing off to LQR balancing control on a cart-pole system</figcaption>
         </figure>
         <ul>
-          <li>In a team of six, designed and built an inverted pendulum on a cart that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
+          <li>Leading a team of six, designed and built an inverted pendulum on a cart that swings the pendulum up from rest and holds it upright indefinitely under closed-loop control.</li>
           <li>Architected the full control stack: an energy-based swing-up controller with an energy-gated handoff to an LQR balancing controller, so the system transitions automatically once the pendulum enters the capture region near vertical.</li>
           <li>Implemented state estimation with a Kalman filter fusing encoder position and velocity, tuned to reject quantization noise without lagging the fast dynamics.</li>
           <li>Built the hardware around a NEMA 17 stepper driven by a TMC2209, AMT10E2-V encoders for cart and pendulum angle, and an Arduino Nano ESP32 running the real-time loop.</li>
